@@ -52,6 +52,9 @@ header {
 .letter--hint-close {
   background: #cc4;
 }
+.feedback {
+  white-space: pre-wrap;
+}
 
 .keyboard {
   display: flex;
@@ -85,6 +88,17 @@ header {
   font-size: 0.7rem;
   margin: 0 0.5rem;
 }
+
+.key--hint-correct {
+  background: #8d8;
+}
+.key--hint-wrong {
+  background: #888;
+}
+.key--hint-close {
+  background: #cc4;
+}
+
 
 @keyframes shake {
   8% {

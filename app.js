@@ -52,9 +52,9 @@ async function animate(el, name, ms) {
 async function startGame({ word, kb, board, words }) {
   let guesses = [];
   const solution = word.split("");
-  for (let round = 0; round < ROUNDS; round++) {
+  let round = 0;
+  for (round = 0; round < ROUNDS; round++) {
     const guess = await collectGuess({ kb, board, round, words });
-    console.log(guess);
     const hints = guess.map((letter, i) => {
       let pos = solution.indexOf(letter);
       if (solution[i] === letter) {
@@ -65,8 +65,11 @@ async function startGame({ word, kb, board, words }) {
       return "wrong";
     });
     board.revealHint(round, hints);
+    kb.revealHint(guess, hints);
   }
-  $(".feedback").innerText = `Correct Answer was: ${word}`;
+  if (round === 6) {
+    $(".feedback").innerText = `Correct Answer was: ${word}`;
+  }
 }
 
 function collectGuess({ kb, board, round, words }) {
@@ -166,5 +169,10 @@ function generateKeyboard() {
   return {
     on: (l) => keyListeners.add(l),
     off: (l) => keyListeners.delete(l),
+    revealHint: (guess, hints) => {
+      hints.forEach((hint, i) => {
+        $(`[data-key="${guess[i]}"]`).classList.add("key--hint-" + hint);
+      })
+    }
   };
 }
