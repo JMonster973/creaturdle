@@ -66,10 +66,12 @@ async function startGame({ word, kb, board, words }) {
     });
     board.revealHint(round, hints);
     kb.revealHint(guess, hints);
+    if (guess.join('') === word) {
+      $(".feedback").innerText = `Nice Work!`;  
+      return;
+    }
   }
-  if (round === 6) {
-    $(".feedback").innerText = `Correct Answer was: ${word}`;
-  }
+  $(".feedback").innerText = `GAME OVER\nCorrect Answer was: ${word}`;
 }
 
 function collectGuess({ kb, board, round, words }) {
