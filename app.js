@@ -41,7 +41,7 @@ async function init() {
   const words = (await dictionaryRequest).split("\n");
   const cusses = (await swearRequest).split("\n");
   const word = cusses[(Math.random() * cusses.length) | 0];
-  $(".feedback").innerText = words;
+  
   await startGame({ word, kb, board, words });
 }
 
@@ -69,7 +69,7 @@ async function startGame({ word, kb, board, words }) {
     board.revealHint(round, hints);
     kb.revealHint(guess, hints);
     if (guess.join('') === word) {
-      $(".feedback").innerText = `Nice Work!`;  
+      $(".feedback").innerText = `Correct. I'm sure your mother will be very proud.`;  
       return;
     }
   }
