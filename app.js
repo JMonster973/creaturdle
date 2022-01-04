@@ -39,9 +39,9 @@ async function init() {
   const kb = generateKeyboard();
 
   const words = (await dictionaryRequest).split("\n");
-  const cusses = (await dictionaryRequest).split("\n");
-  const word = cusses[(Math.random() * words.length) | 0];
-
+  const cusses = (await swearRequest).split("\n");
+  const word = cusses[(Math.random() * cusses.length) | 0];
+  $(".feedback").innerText = words;
   await startGame({ word, kb, board, words });
 }
 
