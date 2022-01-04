@@ -28,6 +28,7 @@ const ROUNDS = 6;
 const LENGTH = 4 ;
 
 const dictionaryRequest = fetch("/dictionary.txt").then((r) => r.text());
+const swearRequest = fetch("/swears.txt").then((ra) => ra.text());
 const board = $(".board");
 const keyboard = $(".keyboard");
 
@@ -38,7 +39,8 @@ async function init() {
   const kb = generateKeyboard();
 
   const words = (await dictionaryRequest).split("\n");
-  const word = words[(Math.random() * words.length) | 0];
+  const cusses = (await dictionaryRequest).split("\n");
+  const word = cusses[(Math.random() * words.length) | 0];
 
   await startGame({ word, kb, board, words });
 }
