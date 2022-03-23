@@ -25,10 +25,10 @@ const PRETTY_KEYS = {
 };
 
 const ROUNDS = 6;
-const LENGTH = 4 ;
+const LENGTH = 5 ;
 
 const dictionaryRequest = fetch("/dictionary.txt").then((r) => r.text());
-const swearRequest = fetch("/swears.txt").then((ra) => ra.text());
+const swearRequest = fetch("/words.txt").then((ra) => ra.text());
 const board = $(".board");
 const keyboard = $(".keyboard");
 
@@ -69,7 +69,7 @@ async function startGame({ word, kb, board, words }) {
     board.revealHint(round, hints);
     kb.revealHint(guess, hints);
     if (guess.join('') === word) {
-      $(".feedback").innerText = `Correct. I'm sure your mother will be very proud.`;  
+      $(".feedback").innerText = `Correct.`;  
       return;
     }
   }
@@ -81,7 +81,7 @@ function collectGuess({ kb, board, round, words }) {
     let letters = [];
     async function keyHandler(key) {
       if (key === "+") {
-        if (letters.length === 4) {
+        if (letters.length === 5) {
           const guessIsValid = words.includes(letters.join(""));
           if (!guessIsValid) {
             $(".feedback").innerText = "Invalid Word";
