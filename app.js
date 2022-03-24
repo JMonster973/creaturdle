@@ -25,7 +25,7 @@ const PRETTY_KEYS = {
 };
 
 const ROUNDS = 6;
-const LENGTH = 5 ;
+const LENGTH = 5;
 
 const dictionaryRequest = fetch("/dictionary.txt").then((r) => r.text());
 const swearRequest = fetch("/words.txt").then((ra) => ra.text());
@@ -41,7 +41,7 @@ async function init() {
   const words = (await dictionaryRequest).split("\n");
   const cusses = (await swearRequest).split("\n");
   const word = cusses[(Math.random() * cusses.length) | 0];
-  
+
   await startGame({ word, kb, board, words });
 }
 
@@ -68,8 +68,8 @@ async function startGame({ word, kb, board, words }) {
     });
     board.revealHint(round, hints);
     kb.revealHint(guess, hints);
-    if (guess.join('') === word) {
-      $(".feedback").innerText = `Correct.`;  
+    if (guess.join("") === word) {
+      $(".feedback").innerText = `Correct!`;
       return;
     }
   }
@@ -176,7 +176,7 @@ function generateKeyboard() {
     revealHint: (guess, hints) => {
       hints.forEach((hint, i) => {
         $(`[data-key="${guess[i]}"]`).classList.add("key--hint-" + hint);
-      })
-    }
+      });
+    },
   };
 }
